@@ -1,0 +1,15 @@
+{
+  "name": "shorts",
+  "private": true,
+  "type": "module",
+  "description": "Procedural pipeline for rendering Minecraft-style YouTube Shorts",
+  "scripts": {
+    "render": "node render/render.mjs"
+  },
+  "dependencies": {
+    "@fontsource/luckiest-guy": "5.3.0",
+    "@fontsource/pixelify-sans": "5.3.0",
+    "@fontsource/press-start-2p": "5.3.0",
+    "three": "0.186.1"
+  }
+}

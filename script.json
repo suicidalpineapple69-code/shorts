@@ -1,0 +1,81 @@
+{
+  "title": "Noob vs Pro vs Hacker: Halloween House",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "voice": "af_heart",
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Which Halloween house would you survive in?",
+      "speed": 1.08,
+      "caption": "Which ^Halloween house would *you survive in?"
+    },
+    {
+      "id": "noob_a",
+      "text": "The noob built a dirt box...",
+      "speed": 1.08,
+      "caption": "The #noob built a dirt box..."
+    },
+    {
+      "id": "noob_b",
+      "text": "and forgot to carve the pumpkin.",
+      "speed": 1.08,
+      "caption": "and forgot to carve the ^pumpkin."
+    },
+    {
+      "id": "pro_a",
+      "text": "The pro built a haunted cottage...",
+      "speed": 1.08,
+      "caption": "The $pro built a haunted cottage..."
+    },
+    {
+      "id": "pro_b",
+      "text": "with its own graveyard.",
+      "speed": 1.05,
+      "caption": "with its own graveyard."
+    },
+    {
+      "id": "hack_a",
+      "text": "But the hacker typed one command...",
+      "speed": 1.08,
+      "caption": "But the !hacker typed !one command..."
+    },
+    {
+      "id": "hack_b",
+      "text": "and built a house inside a giant pumpkin.",
+      "speed": 1.08,
+      "caption": "and built a house *inside a ^giant ^pumpkin."
+    },
+    {
+      "id": "cta_a",
+      "text": "So which one are you picking?",
+      "speed": 1.08,
+      "caption": "So which one are you picking?"
+    },
+    {
+      "id": "cta_1",
+      "text": "One,",
+      "speed": 1.0,
+      "caption": "#One,"
+    },
+    {
+      "id": "cta_2",
+      "text": "two,",
+      "speed": 1.0,
+      "caption": "$two,"
+    },
+    {
+      "id": "cta_3",
+      "text": "three...",
+      "speed": 1.0,
+      "caption": "!three..."
+    },
+    {
+      "id": "cta_b",
+      "text": "or... four?",
+      "speed": 1.0,
+      "caption": "or... %four?"
+    }
+  ]
+}
