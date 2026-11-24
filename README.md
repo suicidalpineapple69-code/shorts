@@ -4,7 +4,11 @@ Code that renders Minecraft-style YouTube Shorts. Everything in the video is gen
 voxel world, pixel textures, camera work, captions, voiceover, music and sound effects. No game
 assets or third-party footage are used.
 
-Current short: **Noob vs Pro vs Hacker vs GOD: Halloween House** (30 s, 1080x1920, 60 fps).
+Shorts in this repo:
+
+- **Noob vs Pro vs Hacker vs GOD: Halloween House** (30 s, 1080x1920, 60 fps): `./make.sh`, files below.
+- **Which Armor Will Save Him?** (34.5 s, 1080x1920, 30 fps): a Teardown-style voxel destruction short, `armor/make.sh`.
+  See [`armor/README.md`](armor/README.md).
 
 ## Build
 

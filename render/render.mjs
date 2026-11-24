@@ -5,6 +5,7 @@
 //   node render/render.mjs --stills 0.4,6.9,21.5   PNG stills -> build/stills/
 //   node render/render.mjs --from 10 --to 12       a time range
 //   node render/render.mjs --jobs 2                split the frames over two browsers
+//   node render/render.mjs --project armor         render another short (armor/ page, build/armor/)
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -28,7 +29,10 @@ const args = Object.fromEntries(
   }, []),
 );
 
-const T = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'timeline.json'), 'utf8'));
+// --project armor renders armor/index.html with build/armor/timeline.json into build/armor/
+const project = args.project && args.project !== true ? String(args.project) : '';
+const BUILD = path.join(ROOT, 'build', project);
+const T = JSON.parse(fs.readFileSync(path.join(BUILD, 'timeline.json'), 'utf8'));
 const scale = Number(args.scale || 1);
 const W = Math.round((1080 * scale) / 2) * 2, H = Math.round((1920 * scale) / 2) * 2;
 const fps = Number(args.fps || T.fps);
@@ -56,7 +60,7 @@ async function openPage(browser, port) {
   page.on('console', (m) => {
     if (m.type() === 'error') console.error('page:', m.text());
   });
-  await page.goto(`http://127.0.0.1:${port}/render/index.html`);
+  await page.goto(`http://127.0.0.1:${port}/${project || 'render'}/index.html`);
   await page.waitForFunction('window.ready === true', null, { timeout: 120000 });
   const info = await page.evaluate(([tl, o]) => window.init(tl, o), [T, { width: W, height: H }]);
   return { page, info };
@@ -82,13 +86,14 @@ async function main() {
   const srv = await serve();
   const port = srv.address().port;
   const launch = () => chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--enable-webgl'] });
-  fs.mkdirSync(path.join(ROOT, 'build'), { recursive: true });
+  fs.mkdirSync(BUILD, { recursive: true });
 
   if (args.stills) {
     const browser = await launch();
     const { page, info } = await openPage(browser, port);
     console.log('scene', info);
-    const dir = path.join(ROOT, 'build', 'stills');
+    if (args.debug) for (const s of String(args.debug).split(',')) console.log(s, JSON.stringify(await page.evaluate((tt) => window.debugInfo(tt), Number(s))));
+    const dir = path.join(BUILD, 'stills');
     fs.mkdirSync(dir, { recursive: true });
     for (const s of String(args.stills).split(',')) {
       const t = Number(s);
@@ -106,7 +111,7 @@ async function main() {
   const from = Number(args.from || 0), to = Number(args.to || T.duration);
   const first = Math.round(from * fps), last = Math.round(to * fps);
   const total = last - first;
-  const out = args.out ? path.resolve(args.out) : path.join(ROOT, 'build', scale < 1 ? 'preview.mp4' : 'video.mp4');
+  const out = args.out ? path.resolve(args.out) : path.join(BUILD, scale < 1 ? 'preview.mp4' : 'video.mp4');
   const per = Math.ceil(total / jobs);
   const parts = [];
   const started = Date.now();
